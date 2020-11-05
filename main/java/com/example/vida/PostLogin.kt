@@ -10,4 +10,9 @@ class PostLogin : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.post_login)
     }
+
+    fun seePlans(view: View){
+        val intent = Intent(this, TripTypeSelect::class.java)
+        startActivity(intent)
+    }
 }
