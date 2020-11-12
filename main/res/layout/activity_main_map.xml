@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:layout_editor_absoluteX="185dp"
+    tools:layout_editor_absoluteY="253dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="96dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/historical" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="267dp"
+            android:layout_height="67dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:shadowColor="#000000"
+            android:shadowDx="1.9"
+            android:shadowDy="1.7"
+            android:shadowRadius="1.6"
+            android:text="Historical"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="42sp"
+            android:textStyle="bold"
+            android:typeface="sans" />
+
+    </RelativeLayout>
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="263dp"
+        tools:context=".main_map" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_marginBottom="170dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_centerInParent="true"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/loginUsername"
+                android:layout_width="350dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:background="@drawable/edit_custom_shape"
+                android:ems="10"
+                android:text="Buda Castle"
+                android:textSize="20sp"
+                android:inputType="none"
+                android:padding="25dp"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/loginUsername"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="39dp"
+                android:foregroundGravity="center"
+                android:text="14:00"
+                android:textSize="20sp" />
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="59dp"
+                android:layout_height="59dp"
+                android:layout_alignEnd="@+id/loginUsername"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="5dp"
+                android:background="@null"
+                android:onClick="openDesc"
+                android:src="@android:drawable/ic_dialog_info" />
+
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#109D21"
+            android:text="Get Plan" />
+
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_width="28dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="52dp"
+            android:background="@null"
+            android:src="@drawable/ic_left_arrow" />
+    </LinearLayout>
+</LinearLayout>

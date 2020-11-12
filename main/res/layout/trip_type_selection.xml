@@ -85,11 +85,12 @@
                     android:src="@drawable/ic_filters" />
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
+            <RelativeLayout android:layout_width="wrap_content"
                 android:layout_height="200dp"
                 android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp">
+                android:layout_marginEnd="15dp"
+                android:onClick="goToMap"
+                xmlns:android="http://schemas.android.com/apk/res/android">
 
                 <TextView
                     android:id="@+id/textView8"

@@ -27,7 +27,7 @@ class TripFilter : AppCompatActivity() {
         dropdown.setAdapter(adapter)
 
     }
-    fun backToSelect(view: View){
+    fun backToTS(view: View){
         val intent = Intent(this, TripTypeSelect::class.java)
         startActivity(intent)
     }

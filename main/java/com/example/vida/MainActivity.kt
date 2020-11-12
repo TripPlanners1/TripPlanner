@@ -1,23 +1,24 @@
 package com.example.vida
 
+import RestApiService
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-/*import okhttp3.Call
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.Request
-import okhttp3.RequestBody*/
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.io.OutputStreamWriter
-import java.net.HttpURLConnection
-import java.net.URL
-import java.net.URLEncoder
+import com.google.gson.annotations.SerializedName
+
+
+data class UserInfo (
+        @SerializedName("user_id") val userId: Int?,
+        @SerializedName("user_name") val userName: String?,
+        @SerializedName("user_email") val userEmail: String?,
+        @SerializedName("user_age") val userAge: String?,
+        @SerializedName("user_uid") val userUid: String?
+)
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,36 +36,23 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun sendPostRequest(view:View) {
-        try {
-            //var reqParam = URLEncoder.encode("?name", "UTF-8") + "=" + URLEncoder.encode("Testz", "UTF-8")
-            val mURL = URL("https://e101ebf8cb03.ngrok.io/tripPlanner/hello_world?name=Testz")
 
-            with(mURL.openConnection() as HttpURLConnection) {
-                // optional default is GET
-                requestMethod = "POST"
+    fun addDummyUser(view: View) {
+        val apiService = RestApiService()
+        val userInfo = UserInfo(  userId = null,
+                userName = "Alex",
+                userEmail = "alex@gmail.com",
+                userAge = "32",
+                userUid = "164E92FC-D37A-4946-81CB-29DE7EE4B124" )
 
-                /*val wr = OutputStreamWriter(getOutputStream());
-                wr.write(reqParam);
-                wr.flush();*/
-
-                println("URL : $url")
-                println("Response Code : $responseCode")
-
-                BufferedReader(InputStreamReader(inputStream)).use {
-                    val response = StringBuffer()
-
-                    var inputLine = it.readLine()
-                    while (inputLine != null) {
-                        response.append(inputLine)
-                        inputLine = it.readLine()
-                    }
-                    println("Response : $response")
-                }
+        apiService.addUser(userInfo) {
+            if (it?.userId != null) {
+                 // = newly added user parsed as response
+                 //it?.userId = newly added user ID
+            } else {
+                Log.v("YO","ERRROOOOR")
             }
-        }catch(ex:Exception){
-            println(ex.message)
         }
-        }
+    }
 
 }
