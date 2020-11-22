@@ -45,13 +45,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun UserLogin(view: View){
+            var status : Int? = null
             var userName : String = loginUserName.text.toString()
             var password : String = loginPassword.text.toString()
 
-            var status : Int = 0
             var volleyRequestQueue: RequestQueue? = null
             var dialog: ProgressDialog? = null
-            val serverAPIURL: String = "https://834b20a9193a.ngrok.io/tripPlanner/login?nickname=$userName&password=$password"
+            val serverAPIURL: String = "https://fff9fe51134a.ngrok.io/tripPlanner/login?nickname=$userName&password=$password"
             val TAG = "Please Work"
 
             volleyRequestQueue = Volley.newRequestQueue(this)
@@ -67,15 +67,20 @@ class MainActivity : AppCompatActivity() {
                     Response.Listener { response ->
                         Log.e(TAG, "map" + response)
                         //dialog?.dismiss()
-
+                        var status : Int? = null
                         // Handle Server response here
                         try {
                             val responseObj = JSONObject(response)
                             val response = responseObj.getJSONObject("map")
                             status = response.getInt("response")
-
                             //val error = responseObj.get("errorClass")
-                            println("---------"+status+"---------")
+                            if (status==200){
+                                val intent = Intent(this, PostLogin::class.java)
+                                intent.putExtra("userName", userName);
+                                startActivity(intent)
+                            }else{
+                                Toast.makeText(this, "Sign in failed, check username or password", Toast.LENGTH_LONG).show()
+                            }
                             //Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 
                         } catch (e: Exception) { // caught while parsing the response
@@ -102,13 +107,6 @@ class MainActivity : AppCompatActivity() {
             // Adding request to request queue
             volleyRequestQueue?.add(strReq)
 
-            if (status==200){
-                val intent = Intent(this, PostLogin::class.java)
-                intent.putExtra("userName", userName);
-                startActivity(intent)
-            }else{
-                Toast.makeText(this, "Sign in failed, check username or password", Toast.LENGTH_LONG).show()
-            }
-        }
+    }
 
 }

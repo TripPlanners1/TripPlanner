@@ -7,12 +7,14 @@ import android.view.View
 import android.widget.TextView
 
 class PostLogin : AppCompatActivity() {
-    val textView : TextView = findViewById(R.id.postLoginText)
+    private lateinit var textView : TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.post_login)
+        textView = findViewById(R.id.postLoginText)
         val userName = intent.getStringExtra("userName")
-        textView.text = userName
+        val welcome = "Welcome, "+ userName
+        textView.text = welcome
     }
 
     fun seePlans(view: View){

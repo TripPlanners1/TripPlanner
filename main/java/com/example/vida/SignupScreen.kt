@@ -39,10 +39,9 @@ class SignupScreen : AppCompatActivity() {
         var email : String = signEmail.text.toString()
         var password : String = signPassword.text.toString()
 
-        var status : Int = 0
         var volleyRequestQueue: RequestQueue? = null
         var dialog: ProgressDialog? = null
-        val serverAPIURL: String = "https://834b20a9193a.ngrok.io/tripPlanner/login?nickname=$userName&password=$password&email=$email"
+        val serverAPIURL: String = "https://fff9fe51134a.ngrok.io/tripPlanner/signup?nickname=$userName&password=$password&email=$email"
         val TAG = "Please Work"
 
         volleyRequestQueue = Volley.newRequestQueue(this)
@@ -58,7 +57,7 @@ class SignupScreen : AppCompatActivity() {
                 Response.Listener { response ->
                     Log.e(TAG, "map" + response)
                     //dialog?.dismiss()
-
+                    var status : Int? = null
                     // Handle Server response here
                     try {
                         val responseObj = JSONObject(response)
@@ -66,7 +65,11 @@ class SignupScreen : AppCompatActivity() {
                         status = response.getInt("response")
 
                         //val error = responseObj.get("errorClass")
-                        println("---------"+status+"---------")
+                        if (status==200){
+                            Toast.makeText(this, "Successful Sign Up", Toast.LENGTH_LONG).show()
+                        }else{
+                            Toast.makeText(this, "Sign up failed, check username or password", Toast.LENGTH_LONG).show()
+                        }
                         //Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 
                     } catch (e: Exception) { // caught while parsing the response
@@ -93,11 +96,5 @@ class SignupScreen : AppCompatActivity() {
         // Adding request to request queue
         volleyRequestQueue?.add(strReq)
 
-        if (status==200){
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }else{
-            Toast.makeText(this, "Sign up failed, check username or password", Toast.LENGTH_LONG).show()
-        }
     }
 }
