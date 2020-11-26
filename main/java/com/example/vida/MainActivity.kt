@@ -5,8 +5,11 @@ import android.content.Intent
 import android.icu.text.DateFormat.MEDIUM
 import android.os.Bundle
 import android.renderscript.RenderScript
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -27,14 +30,35 @@ class MainActivity : AppCompatActivity() {
     private lateinit  var loginUserName : TextView
     private lateinit  var loginPassword : TextView
 
+    private lateinit  var showPassword : ImageButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         loginUserName = findViewById(R.id.loginUsername) as TextView
         loginPassword = findViewById(R.id.loginPassword) as TextView
+
+        showPassword = findViewById(R.id.showPassword) as ImageButton
+        showHidePW()
     }
 
-    fun login(){
+    fun showHidePW(){
+        var isClicked = false
+        showPassword.setOnClickListener {
+            if (!isClicked) {
+                // show password
+                loginPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                isClicked=true
+            } else {
+                // hide password
+                loginPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                isClicked=false
+            }
+        }
+    }
+
+    fun login(view: View){
         val intent = Intent(this, PostLogin::class.java)
         startActivity(intent)
     }
@@ -51,8 +75,8 @@ class MainActivity : AppCompatActivity() {
 
             var volleyRequestQueue: RequestQueue? = null
             var dialog: ProgressDialog? = null
-            val serverAPIURL: String = "https://fff9fe51134a.ngrok.io/tripPlanner/login?nickname=$userName&password=$password"
-            val TAG = "Please Work"
+            val serverAPIURL: String = "https://a9d2aebf8d9c.ngrok.io/tripPlanner/login?nickname=$userName&password=$password"
+            val TAG = "Work"
 
             volleyRequestQueue = Volley.newRequestQueue(this)
             //dialog = ProgressDialog.show(this, "", "Please wait...", true);

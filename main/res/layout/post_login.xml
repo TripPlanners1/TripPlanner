@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/loginUsername"
+        android:id="@+id/city"
         android:layout_width="260dp"
         android:layout_height="61dp"
         android:background="@drawable/edit_custom_shape"
@@ -24,19 +24,21 @@
         app:layout_constraintVertical_bias="0.389" />
 
     <EditText
-        android:id="@+id/loginPassword"
-        android:layout_width="260dp"
+        android:id="@+id/arrivalDate"
+        android:layout_width="210dp"
         android:layout_height="61dp"
         android:background="@drawable/edit_custom_shape"
         android:ems="10"
-        android:inputType="date"
-        android:padding="12dp"
+        android:enabled="false"
         android:hint="Arrival Date"
+        android:padding="12dp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.378"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginUsername"
-        app:layout_constraintVertical_bias="0.063" />
+        app:layout_constraintTop_toBottomOf="@+id/city"
+        app:layout_constraintVertical_bias="0.068" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
@@ -54,22 +56,23 @@
         app:layout_constraintVertical_bias="0.503" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
-        android:layout_width="260dp"
+        android:id="@+id/returnDate"
+        android:layout_width="210dp"
         android:layout_height="61dp"
         android:background="@drawable/edit_custom_shape"
+        android:ellipsize="start"
         android:ems="10"
+        android:enabled="false"
+        android:gravity="center_vertical"
         android:hint="Return Date"
         android:padding="12dp"
-        android:inputType="date"
-        android:gravity="center_vertical"
-        android:ellipsize="start"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.378"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginUsername"
-        app:layout_constraintVertical_bias="0.295" />
+        app:layout_constraintTop_toBottomOf="@+id/city"
+        app:layout_constraintVertical_bias="0.304" />
 
     <Button
         android:id="@+id/plansButton"
@@ -83,19 +86,46 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginPassword"
+        app:layout_constraintTop_toBottomOf="@+id/arrivalDate"
         app:layout_constraintVertical_bias="0.517" />
 
     <TextView
         android:id="@+id/postLoginText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome, JohnSmith"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/loginUsername"
+        app:layout_constraintBottom_toTopOf="@+id/city"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+
+    <ImageButton
+        android:id="@+id/arrivalButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintStart_toEndOf="@+id/arrivalDate"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.514"
+        app:srcCompat="@drawable/ic_calendar" />
+
+    <ImageButton
+        android:id="@+id/returnButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintStart_toEndOf="@+id/arrivalDate"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.629"
+        app:srcCompat="@drawable/ic_calendar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

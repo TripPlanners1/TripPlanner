@@ -4,8 +4,11 @@ import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import com.android.volley.AuthFailureError
@@ -22,13 +25,35 @@ class SignupScreen : AppCompatActivity() {
     private lateinit var signEmail : TextView
     private lateinit var signPassword : TextView
 
+    private lateinit var showPasswordSign : ImageButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.signup_screen)
+
         signUserName = findViewById(R.id.signUsername) as TextView
         signEmail = findViewById(R.id.signEmail) as TextView
         signPassword = findViewById(R.id.signPassword) as TextView
+
+        showPasswordSign = findViewById(R.id.showPasswordSign) as ImageButton
+        showHidePW()
     }
+
+    fun showHidePW(){
+        var isClicked = false
+        showPasswordSign.setOnClickListener {
+            if (!isClicked) {
+                // show password
+                signPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                isClicked=true
+            } else {
+                // hide password
+                signPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                isClicked=false
+            }
+        }
+    }
+
     fun home(view: View){
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
@@ -41,8 +66,8 @@ class SignupScreen : AppCompatActivity() {
 
         var volleyRequestQueue: RequestQueue? = null
         var dialog: ProgressDialog? = null
-        val serverAPIURL: String = "https://fff9fe51134a.ngrok.io/tripPlanner/signup?nickname=$userName&password=$password&email=$email"
-        val TAG = "Please Work"
+        val serverAPIURL: String = "https://a9d2aebf8d9c.ngrok.io/tripPlanner/signup?nickname=$userName&password=$password&email=$email"
+        val TAG = "Work"
 
         volleyRequestQueue = Volley.newRequestQueue(this)
         //dialog = ProgressDialog.show(this, "", "Please wait...", true);

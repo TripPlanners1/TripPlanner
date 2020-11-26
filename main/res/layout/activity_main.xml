@@ -11,7 +11,8 @@
         android:layout_width="260dp"
         android:layout_height="61dp"
         android:background="@drawable/edit_custom_shape"
-        android:drawablePadding="12dp"
+        android:padding="10dp"
+        android:drawablePadding="10dp"
         android:drawableStart="@drawable/ic_person"
         android:ems="10"
         android:inputType="textPersonName"
@@ -39,7 +40,8 @@
         android:layout_width="260dp"
         android:layout_height="61dp"
         android:background="@drawable/edit_custom_shape"
-        android:drawablePadding="12dp"
+        android:padding="10dp"
+        android:drawablePadding="10dp"
         android:drawableStart="@drawable/ic_lock"
         android:ems="10"
         android:inputType="textPassword"
@@ -58,7 +60,7 @@
         android:layout_height="69dp"
         android:backgroundTint="#109D21"
         android:radius="14dp"
-        android:onClick="UserLogin"
+        android:onClick="login"
         android:text="LOGIN"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -111,5 +113,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton"
         app:layout_constraintVertical_bias="0.071" />
+
+    <ImageButton
+        android:id="@+id/showPassword"
+        android:layout_width="31dp"
+        android:layout_height="32dp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.778"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.512"
+        app:srcCompat="@drawable/ic_show_password" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
