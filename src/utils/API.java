@@ -7,6 +7,7 @@ import service.*;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -143,12 +144,18 @@ public class API {
     @Transactional
     public JSONObject seeOnePlan(JSONObject ids) throws Exception {
         JSONObject reply = new JSONObject();
-        JSONObject days = new JSONObject();
         JSONObject final_places = new JSONObject();
         JSONArray routeIDs = new JSONArray();
+        //get to know the number of days
+        Iterator keysToCopyIterator = ids.keys();
+        int number_of_days = 0;
+        while(keysToCopyIterator.hasNext()) {
+            String key = (String) keysToCopyIterator.next();
+            number_of_days++;
+        }
         try {
-            for (int route = 0; route < numberOfRoutes; route++) {
-                routeIDs = ids.getJSONArray(String.valueOf(route));
+            for (int day = 0; day < number_of_days - 1; day++) {
+                routeIDs = ids.getJSONArray(String.valueOf(day));
                 for (int i = 0; i < routeIDs.length(); i++) {
                     int current_index = (int) routeIDs.get(i);
                     Route r = routeService.getRouteById(current_index);
@@ -160,11 +167,13 @@ public class API {
                         place_info.put(current_place_info.get("placeAddress"));
                         place_info.put(current_place_info.get("placeInformation"));
                         place_info.put(current_place_info.get("placeRating"));
-                        final_places = new JSONObject().put(String.valueOf(i), (Object) place_info);
-                        days.put(String.valueOf(r.getDayNumber()), final_places);
+                        final_places.put(String.valueOf(i), (Object) place_info);
+                        System.out.println(final_places);
                     }
                 }
-                reply.put(String.valueOf(route), (Object) days);
+                reply.put(String.valueOf(day), final_places);
+                //System.out.println(reply);
+                final_places = new JSONObject();
             }
             return reply;
         } catch (Throwable ex) {
