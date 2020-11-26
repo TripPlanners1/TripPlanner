@@ -28,7 +28,8 @@ public class API {
         String pass = enteredUser.getString("password");
         Users user = new Users(nickname, email, pass);
         try {
-            if (userService.signup(user)) {
+            boolean sp = userService.signup(user);
+            if (sp) {
                 reply.put("response", 200);
             } else reply.put("response", 400);
         } catch (Exception ex) {

@@ -9,7 +9,7 @@ import java.awt.print.Printable;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "getCities", urlPatterns = "/getcities")
+//@WebServlet(name = "getCities", urlPatterns = "/getcities")
 public class getCities extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
