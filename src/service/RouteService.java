@@ -13,7 +13,6 @@ public class RouteService extends SessionUtil implements RouteDAO {
         openTransactionSession();
         Session session = getSession();
         session.save(r);
-        session.getTransaction().commit();
         closeTransactionSession();
     }
 
@@ -21,9 +20,8 @@ public class RouteService extends SessionUtil implements RouteDAO {
         openTransactionSession();
         Session session = getSession();
         Query route_from_query = session.createQuery("FROM Route r");
-        //route_from_query.setParameter("id", current_index);
         List currentRoute = route_from_query.list();
-
+        closeTransactionSession();
         return currentRoute;
     }
 
@@ -36,8 +34,7 @@ public class RouteService extends SessionUtil implements RouteDAO {
 
         closeTransactionSession();
         if (route_query.size() != 0) {
-            Route r = (Route) route_query.get(0);
-            return r;
+            return (Route) route_query.get(0);
         } else return new Route();//bad request - not registered Route
     }
 }

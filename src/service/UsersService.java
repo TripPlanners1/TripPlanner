@@ -33,7 +33,7 @@ public class UsersService extends SessionUtil implements UsersDAO {
         return response;
     }
 
-    public boolean login(String nickname, String password) throws SQLException {
+    public Users login(String nickname, String password) throws SQLException {
         //open session with a transaction
         openTransactionSession();
 
@@ -43,12 +43,13 @@ public class UsersService extends SessionUtil implements UsersDAO {
         query.setParameter("nick", nickname);
         query.setParameter("pass", password);
         List q = query.list();
-        if (q.size() != 0) { //this user is in database
-            response = true;
-        }
-        else response = false; //not registered user
+
         closeTransactionSession();
-        return response;
+
+        if (q.size() != 0) { //this user is in database
+            return (Users)q.get(0);
+        }
+        else return new Users(); //not registered user
     }
 
     public Users getUserByID(int id) throws Exception {

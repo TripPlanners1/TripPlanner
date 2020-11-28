@@ -5,6 +5,10 @@ import org.json.*;
 import service.*;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -16,11 +20,12 @@ public class API {
     JSONObject reply = new JSONObject();
     boolean response;
 
-    UsersService userService = new UsersService();
-    CityService cityService = new CityService();
-    PlaceService placeService = new PlaceService();
-    PlaceInformationService placeInformationService = new PlaceInformationService();
-    RouteService routeService = new RouteService();
+    private UsersService userService = new UsersService();
+    private CityService cityService = new CityService();
+    private PlaceService placeService = new PlaceService();
+    private PlaceInformationService placeInformationService = new PlaceInformationService();
+    private RouteService routeService = new RouteService();
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public JSONObject signup(JSONObject enteredUser) throws Exception {
         String nickname = enteredUser.getString("nickname");
@@ -44,8 +49,10 @@ public class API {
         String entered_nickname = enteredUser.getString("nickname");
         String entered_password = enteredUser.getString("password");
         try {
-            if (userService.login(entered_nickname, entered_password)) {
+            Users ln = userService.login(entered_nickname, entered_password);
+            if (ln.getUserID()!=null) {
                 reply.put("response", 200);
+                reply.put("userID", ln.getUserID());
             } else reply.put("response", 400);
         } catch (Exception ex) {
             reply.put("errorClass", ex.getClass()); //exception
@@ -196,14 +203,18 @@ public class API {
             String entered_return = travelInfo.getString("dateOfReturn");
             int userID = travelInfo.getInt("userID");
 
+            LocalDate date1 = LocalDate.parse(entered_arrival, dtf);
+            LocalDate date2 = LocalDate.parse(entered_return, dtf);
+
+            int number_of_days = (int)(long)ChronoUnit.DAYS.between(date1, date2);
+            System.out.println("Days between: " + number_of_days);
+
             //check correctness of user ID
             JSONObject user = checkUserExistenceByID(userID);
             if (user.getInt("response") != 200) {
                 reply.put("error", "No user with such ID exist");
                 return reply;
             }
-
-            int number_of_days = Integer.parseInt(entered_return) - Integer.parseInt(entered_arrival);
 
             if (number_of_days <= 3) {
                 number_of_needed_places = 1; //each day visit N historical places
