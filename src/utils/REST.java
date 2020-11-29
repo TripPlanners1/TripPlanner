@@ -16,6 +16,12 @@ public class REST {
     private JSONObject apiResponse;
     API api = new API();
 
+    @GET
+    @Produces({ MediaType.TEXT_HTML, MediaType.TEXT_PLAIN })
+    public String default_() {
+        return "tripPlanner";
+    }
+
     @Path("login/{nickname}/{password}")
     @GET
     @Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
