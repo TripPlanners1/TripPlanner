@@ -2,10 +2,7 @@ package utils;
 
 import org.json.JSONObject;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.PrintWriter;
@@ -15,12 +12,6 @@ public class REST {
     private JSONObject request = new JSONObject();
     private JSONObject apiResponse;
     API api = new API();
-
-    @GET
-    @Produces({ MediaType.TEXT_HTML, MediaType.TEXT_PLAIN })
-    public String default_() {
-        return "tripPlanner";
-    }
 
     @Path("login/{nickname}/{password}")
     @GET
@@ -89,11 +80,19 @@ public class REST {
         return Response.status(apiResponse.getInt("response")).entity(result).build();
     }
 
-    @Path("seePlans/{info}")
+    @Path("seePlans/{cityName}/{dateOfArrival}/{dateOfReturn}/{userID}")
     @GET
+    //@Consumes({ MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON })
     @Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
-    public Response seePlans(@PathParam("info") JSONObject travelInfo) throws Exception {
-        apiResponse = api.seePlans(travelInfo); //travelInfo - cityName, dateOfArrival, dateOfReturn, userID
+    public Response seePlans(@PathParam("cityName") String city,
+                             @PathParam("dateOfArrival") String date1,
+                             @PathParam("dateOfReturn") String date2,
+                             @PathParam("userID") String id) throws Exception {
+        request.put("cityName", city);
+        request.put("dateOfArrival", date1);
+        request.put("dateOfReturn", date2);
+        request.put("userID", Integer.parseInt(id));
+        apiResponse = api.seePlans(request);
         System.out.println(apiResponse);
         String result = "" + apiResponse;
         return Response.status(apiResponse.getInt("response")).entity(result).build();

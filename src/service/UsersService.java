@@ -7,12 +7,18 @@ import utils.SessionUtil;
 import dao.UsersDAO;
 import org.hibernate.Session;
 
+import javax.annotation.PostConstruct;
 import java.sql.*;
 import java.util.List;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.annotation.FacesConfig;
 
+@FacesConfig
+@ApplicationScoped
 public class UsersService extends SessionUtil implements UsersDAO {
     boolean response;
-
     public boolean signup(Users user) throws SQLException {
         //open session with a transaction
         openTransactionSession();

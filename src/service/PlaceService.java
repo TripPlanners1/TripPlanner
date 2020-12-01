@@ -8,7 +8,12 @@ import org.hibernate.query.Query;
 import utils.SessionUtil;
 
 import java.util.List;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.annotation.FacesConfig;
 
+@FacesConfig
+@ApplicationScoped
 public class PlaceService extends SessionUtil implements PlaceDAO {
 
     public Place getPlaceByID(int id) throws Exception {

@@ -84,8 +84,8 @@ public class APITest {
     @Test
     public void testseePlans() throws Exception {
         JSONObject info = new JSONObject().put("cityName","Marvel");
-        info.put("dateOfArrival","20/10/2020");
-        info.put("dateOfReturn","21/10/2020");
+        info.put("dateOfArrival","20.10.2020");
+        info.put("dateOfReturn","21.10.2020");
         info.put("userID", 1);
         JSONObject resp = api.seePlans(info);
         //wrong city name
@@ -93,16 +93,16 @@ public class APITest {
 
         //wrong user id
         JSONObject info_2 = new JSONObject().put("cityName","Budapest");
-        info_2.put("dateOfArrival","20/10/2020");
-        info_2.put("dateOfReturn","21/10/2020");
+        info_2.put("dateOfArrival","20.10.2020");
+        info_2.put("dateOfReturn","21.10.2020");
         info_2.put("userID", 0);
         resp = api.seePlans(info_2);
         JSONAssert.assertEquals("{\"error\":\"No user with such ID exist\"}", resp, false);
 
         //no places for this city
         JSONObject info_3 = new JSONObject().put("cityName","Moscow");
-        info_3.put("dateOfArrival","20/10/2020");
-        info_3.put("dateOfReturn","21/10/2020");
+        info_3.put("dateOfArrival","20.10.2020");
+        info_3.put("dateOfReturn","21.10.2020");
         info_3.put("userID", 1);
         resp = api.seePlans(info_3);
         JSONAssert.assertEquals("{\"error\":\"No places for this city\"}", resp, false);

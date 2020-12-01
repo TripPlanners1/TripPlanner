@@ -4,9 +4,9 @@ import classes.*;
 import org.json.*;
 import service.*;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -20,12 +20,28 @@ public class API {
     JSONObject reply = new JSONObject();
     boolean response;
 
-    private UsersService userService = new UsersService();
-    private CityService cityService = new CityService();
-    private PlaceService placeService = new PlaceService();
-    private PlaceInformationService placeInformationService = new PlaceInformationService();
-    private RouteService routeService = new RouteService();
-    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//    private UsersService userService = new UsersService();
+//    private CityService cityService = new CityService();
+//    private PlaceService placeService = new PlaceService();
+//    private PlaceInformationService placeInformationService = new PlaceInformationService();
+//    private RouteService routeService = new RouteService();
+
+    @Inject
+    private UsersService userService;
+
+    @Inject
+    private CityService cityService;
+
+    @Inject
+    private PlaceService placeService;
+
+    @Inject
+    private PlaceInformationService placeInformationService;
+
+    @Inject
+    private RouteService routeService;
+
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     public JSONObject signup(JSONObject enteredUser) throws Exception {
         String nickname = enteredUser.getString("nickname");
@@ -50,7 +66,7 @@ public class API {
         String entered_password = enteredUser.getString("password");
         try {
             Users ln = userService.login(entered_nickname, entered_password);
-            if (ln.getUserID()!=null) {
+            if (ln.getUserID() != null) {
                 reply.put("response", 200);
                 reply.put("userID", ln.getUserID());
             } else reply.put("response", 400);
@@ -157,7 +173,7 @@ public class API {
         //get to know the number of days
         Iterator keysToCopyIterator = ids.keys();
         int number_of_days = 0;
-        while(keysToCopyIterator.hasNext()) {
+        while (keysToCopyIterator.hasNext()) {
             String key = (String) keysToCopyIterator.next();
             number_of_days++;
         }
@@ -167,7 +183,7 @@ public class API {
                 for (int i = 0; i < routeIDs.length(); i++) {
                     int current_index = (int) routeIDs.get(i);
                     Route r = routeService.getRouteById(current_index);
-                    if (r.getRouteID()!=null) {
+                    if (r.getRouteID() != null) {
                         Place current_place = r.getPlace();
                         JSONObject current_place_info = getPlaceInfoByID(current_place.getPlaceInfoID());
                         JSONArray place_info = new JSONArray().put(current_place.getPlaceType());
@@ -206,7 +222,7 @@ public class API {
             LocalDate date1 = LocalDate.parse(entered_arrival, dtf);
             LocalDate date2 = LocalDate.parse(entered_return, dtf);
 
-            int number_of_days = (int)(long)ChronoUnit.DAYS.between(date1, date2);
+            int number_of_days = (int) (long) ChronoUnit.DAYS.between(date1, date2);
             System.out.println("Days between: " + number_of_days);
 
             //check correctness of user ID
@@ -293,7 +309,7 @@ public class API {
                 routesIDs.put(String.valueOf(route_i), (Object) ids);
                 ids = new JSONArray();
             }
-
+            //should be reply.put
             routesIDs.put("response", 200);
             return routesIDs;
 
