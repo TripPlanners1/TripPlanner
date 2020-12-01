@@ -9,10 +9,9 @@ import utils.SessionUtil;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.annotation.FacesConfig;
 
-@FacesConfig
-@ApplicationScoped
+
+@RequestScoped
 public class RouteService extends SessionUtil implements RouteDAO {
     public void saveRoute(Route r) throws Exception {
         openTransactionSession();

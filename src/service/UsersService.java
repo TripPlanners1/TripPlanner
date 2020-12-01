@@ -13,10 +13,9 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.annotation.FacesConfig;
 
-@FacesConfig
-@ApplicationScoped
+
+@RequestScoped
 public class UsersService extends SessionUtil implements UsersDAO {
     boolean response;
     public boolean signup(Users user) throws SQLException {

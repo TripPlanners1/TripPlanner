@@ -7,6 +7,7 @@ import service.*;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -20,26 +21,26 @@ public class API {
     JSONObject reply = new JSONObject();
     boolean response;
 
-//    private UsersService userService = new UsersService();
-//    private CityService cityService = new CityService();
-//    private PlaceService placeService = new PlaceService();
-//    private PlaceInformationService placeInformationService = new PlaceInformationService();
-//    private RouteService routeService = new RouteService();
+    private UsersService userService = new UsersService();
+    private CityService cityService = new CityService();
+    private PlaceService placeService = new PlaceService();
+    private PlaceInformationService placeInformationService = new PlaceInformationService();
+    private RouteService routeService = new RouteService();
 
-    @Inject
-    private UsersService userService;
-
-    @Inject
-    private CityService cityService;
-
-    @Inject
-    private PlaceService placeService;
-
-    @Inject
-    private PlaceInformationService placeInformationService;
-
-    @Inject
-    private RouteService routeService;
+//    @Inject
+//    private UsersService userService;
+//
+//    @Inject
+//    private CityService cityService;
+//
+//    @Inject
+//    private PlaceService placeService;
+//
+//    @Inject
+//    private PlaceInformationService placeInformationService;
+//
+//    @Inject
+//    private RouteService routeService;
 
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 

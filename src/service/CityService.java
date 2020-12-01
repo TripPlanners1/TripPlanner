@@ -13,10 +13,9 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.annotation.FacesConfig;
 
-@FacesConfig
-@ApplicationScoped
+
+@RequestScoped
 public class CityService extends SessionUtil implements CityDAO {
     JSONArray cityArr = new JSONArray();
     JSONObject reply = new JSONObject();
