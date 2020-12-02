@@ -5,7 +5,6 @@ import org.json.JSONObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.PrintWriter;
 
 @Path("/")
 public class REST {
@@ -80,29 +79,25 @@ public class REST {
         return Response.status(apiResponse.getInt("response")).entity(result).build();
     }
 
-    @Path("seePlans/{cityName}/{dateOfArrival}/{dateOfReturn}/{userID}")
-    @GET
-    //@Consumes({ MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON })
-    @Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
-    public Response seePlans(@PathParam("cityName") String city,
-                             @PathParam("dateOfArrival") String date1,
-                             @PathParam("dateOfReturn") String date2,
-                             @PathParam("userID") String id) throws Exception {
-        request.put("cityName", city);
-        request.put("dateOfArrival", date1);
-        request.put("dateOfReturn", date2);
-        request.put("userID", Integer.parseInt(id));
-        apiResponse = api.seePlans(request);
+    @Path("seePlans")
+    @POST
+    @Consumes("text/plain")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response seePlans(String input) throws Exception {
+        JSONObject request_ = new JSONObject(input);
+        apiResponse = api.seePlans(request_);
         System.out.println(apiResponse);
         String result = "" + apiResponse;
         return Response.status(apiResponse.getInt("response")).entity(result).build();
     }
 
-    @Path("seeoneplan/{IDS}")
-    @GET
-    @Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
-    public Response seeoneplan(@PathParam("IDS") JSONObject ids) throws Exception {
-        apiResponse = api.seeOnePlan(ids); //ids of places given in seePlans
+    @Path("seeoneplan")
+    @POST
+    @Consumes("text/plain")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response seeoneplan(String ids) throws Exception {
+        JSONObject request = new JSONObject(ids);
+        apiResponse = api.seeOnePlan(request); //ids of places given in seePlans
         System.out.println(apiResponse);
         String result = "" + apiResponse;
         return Response.status(apiResponse.getInt("response")).entity(result).build();

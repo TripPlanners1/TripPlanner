@@ -4,10 +4,8 @@ import classes.*;
 import org.json.*;
 import service.*;
 
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -27,21 +25,6 @@ public class API {
     private PlaceInformationService placeInformationService = new PlaceInformationService();
     private RouteService routeService = new RouteService();
 
-//    @Inject
-//    private UsersService userService;
-//
-//    @Inject
-//    private CityService cityService;
-//
-//    @Inject
-//    private PlaceService placeService;
-//
-//    @Inject
-//    private PlaceInformationService placeInformationService;
-//
-//    @Inject
-//    private RouteService routeService;
-
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     public JSONObject signup(JSONObject enteredUser) throws Exception {
@@ -54,12 +37,15 @@ public class API {
             if (sp) {
                 reply.put("response", 200);
             } else reply.put("response", 400);
+            return reply;
         } catch (Exception ex) {
+            reply.put("response", 400);
             reply.put("errorClass", ex.getClass()); //exception
             reply.put("errorMessage", ex.getMessage());
             ex.printStackTrace();
+
+            return reply;
         }
-        return reply;
     }
 
     public JSONObject login(JSONObject enteredUser) throws Exception {
@@ -71,12 +57,14 @@ public class API {
                 reply.put("response", 200);
                 reply.put("userID", ln.getUserID());
             } else reply.put("response", 400);
+            return reply;
         } catch (Exception ex) {
+            reply.put("response", 400);
             reply.put("errorClass", ex.getClass()); //exception
             reply.put("errorMessage", ex.getMessage());
             ex.printStackTrace();
+            return reply;
         }
-        return reply;
     }
 
     public JSONObject getCities() throws Exception {
@@ -88,11 +76,12 @@ public class API {
             } else reply.put("response", 400);//no cities
             return reply;
         } catch (Throwable ex) {
+            reply.put("response", 400);
             reply.put("errorClass", ex.getClass()); //exception
             reply.put("errorMessage", ex.getMessage());
             ex.printStackTrace();
+            return reply;
         }
-        return reply;
     }
 
     public JSONObject getCityByID(int id) throws Exception {
@@ -106,11 +95,12 @@ public class API {
             } else reply.put("response", 400);//bad request - not registered city
             return reply;
         } catch (Throwable ex) {
+            reply.put("response", 400);
             reply.put("errorClass", ex.getClass()); //exception
             reply.put("errorMessage", ex.getMessage());
             ex.printStackTrace();
+            return reply;
         }
-        return reply;
     }
 
     public JSONObject getPlaceByID(int id) throws Exception {
@@ -124,11 +114,12 @@ public class API {
             } else reply.put("response", 400);//bad request - not registered city
             return reply;
         } catch (Throwable ex) {
+            reply.put("response", 400);
             reply.put("errorClass", ex.getClass()); //exception
             reply.put("errorMessage", ex.getMessage());
             ex.printStackTrace();
+            return reply;
         }
-        return reply;
     }
 
     public JSONObject getPlaceInfoByID(int id) throws Exception {
@@ -144,11 +135,12 @@ public class API {
             } else reply.put("response", 400);//bad request - not registered city
             return reply;
         } catch (Throwable ex) {
+            reply.put("response", 400);
             reply.put("errorClass", ex.getClass()); //exception
             reply.put("errorMessage", ex.getMessage());
             ex.printStackTrace();
+            return reply;
         }
-        return reply;
     }
 
     public JSONObject checkUserExistenceByID(int id) throws JSONException {
@@ -157,13 +149,14 @@ public class API {
             if (u.getUserID() != null) {
                 reply.put("response", 200);//exist
             } else reply.put("response", 400);//no such user
-
+            return reply;
         } catch (Throwable ex) {
+            reply.put("response", 400);
             reply.put("errorClass", ex.getClass()); //exception
             reply.put("errorMessage", ex.getMessage());
             ex.printStackTrace();
+            return reply;
         }
-        return reply;
     }
 
     @Transactional
@@ -200,13 +193,15 @@ public class API {
                 //System.out.println(reply);
                 final_places = new JSONObject();
             }
+            reply.put("response", 400);
             return reply;
         } catch (Throwable ex) {
+            reply.put("response", 400);
             reply.put("errorClass", ex.getClass()); //exception
             reply.put("errorMessage", ex.getMessage());
             ex.printStackTrace();
+            return reply;
         }
-        return reply;
     }
 
     public JSONObject seePlans(JSONObject travelInfo) throws Exception {
@@ -310,16 +305,16 @@ public class API {
                 routesIDs.put(String.valueOf(route_i), (Object) ids);
                 ids = new JSONArray();
             }
-            //should be reply.put
+
             routesIDs.put("response", 200);
             return routesIDs;
-
         } catch (Throwable ex) {
+            reply.put("response", 400);
             reply.put("errorClass", ex.getClass()); //exception
             reply.put("errorMessage", ex.getMessage());
             System.out.println(ex.getMessage());
+            return reply;
         }
-        return reply;
     }
 }
 

@@ -29,12 +29,12 @@ public class UsersService extends SessionUtil implements UsersDAO {
         List q = query.list();
         if (q.size() == 0) {//there is no user with this nickname (no data was found)
             session.save(user);
-            session.getTransaction().commit();
+            closeTransactionSession();
+            //session.getTransaction().commit();
             response = true;
         } else response = false;
 
         //close session with a transaction
-        closeTransactionSession();
         return response;
     }
 
