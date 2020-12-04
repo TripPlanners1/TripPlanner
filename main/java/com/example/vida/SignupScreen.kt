@@ -66,7 +66,7 @@ class SignupScreen : AppCompatActivity() {
 
         var volleyRequestQueue: RequestQueue? = null
         var dialog: ProgressDialog? = null
-        val serverAPIURL: String = "https://a9d2aebf8d9c.ngrok.io/tripPlanner/signup?nickname=$userName&password=$password&email=$email"
+        val serverAPIURL: String = "https://f2c9bb66d7c9.ngrok.io/tripPlanner/signup/$userName/$password/$email"
         val TAG = "Work"
 
         volleyRequestQueue = Volley.newRequestQueue(this)
@@ -86,8 +86,7 @@ class SignupScreen : AppCompatActivity() {
                     // Handle Server response here
                     try {
                         val responseObj = JSONObject(response)
-                        val response = responseObj.getJSONObject("map")
-                        status = response.getInt("response")
+                        status = responseObj.getInt("response")
 
                         //val error = responseObj.get("errorClass")
                         if (status==200){

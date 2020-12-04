@@ -26,6 +26,8 @@ import java.lang.Exception
 import java.text.DateFormat.MEDIUM
 
 
+
+
 class MainActivity : AppCompatActivity() {
     private lateinit  var loginUserName : TextView
     private lateinit  var loginPassword : TextView
@@ -69,38 +71,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun UserLogin(view: View){
-            var status : Int? = null
             var userName : String = loginUserName.text.toString()
             var password : String = loginPassword.text.toString()
 
             var volleyRequestQueue: RequestQueue? = null
             var dialog: ProgressDialog? = null
-            val serverAPIURL: String = "https://a9d2aebf8d9c.ngrok.io/tripPlanner/login?nickname=$userName&password=$password"
+            val serverAPIURL: String = "https://f2c9bb66d7c9.ngrok.io/tripPlanner/login/$userName/$password"
             val TAG = "Work"
 
             volleyRequestQueue = Volley.newRequestQueue(this)
-            //dialog = ProgressDialog.show(this, "", "Please wait...", true);
-            val parameters: MutableMap<String, String> = HashMap()
-            // Add your parameters in HashMap
-            //parameters.put("nickname", "marmenaid_");
-            //parameters.put("password", "1234");
 
+            val parameters: MutableMap<String, String> = HashMap()
 
             val strReq: StringRequest = object : StringRequest(
                     Method.GET, serverAPIURL,
                     Response.Listener { response ->
                         Log.e(TAG, "map" + response)
                         //dialog?.dismiss()
-                        var status : Int? = null
+                        var status : Int = 0
+                        var userID : Int = 0
                         // Handle Server response here
                         try {
                             val responseObj = JSONObject(response)
-                            val response = responseObj.getJSONObject("map")
-                            status = response.getInt("response")
+                            status = responseObj.getInt("response")
+                            userID = responseObj.getInt("userID")
                             //val error = responseObj.get("errorClass")
                             if (status==200){
                                 val intent = Intent(this, PostLogin::class.java)
                                 intent.putExtra("userName", userName);
+                                intent.putExtra("userID", userID);
                                 startActivity(intent)
                             }else{
                                 Toast.makeText(this, "Sign in failed, check username or password", Toast.LENGTH_LONG).show()

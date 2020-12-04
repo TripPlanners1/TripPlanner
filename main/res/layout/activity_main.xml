@@ -60,7 +60,7 @@
         android:layout_height="69dp"
         android:backgroundTint="#109D21"
         android:radius="14dp"
-        android:onClick="login"
+        android:onClick="UserLogin"
         android:text="LOGIN"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
