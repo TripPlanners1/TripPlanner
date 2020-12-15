@@ -1,9 +1,11 @@
 package utils;
 
 import classes.*;
+import dao.UsersDAO;
 import org.json.*;
 import service.*;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -172,7 +174,7 @@ public class API {
             number_of_days++;
         }
         try {
-            for (int day = 0; day < number_of_days - 1; day++) {
+            for (int day = 0; day < number_of_days; day++) {
                 routeIDs = ids.getJSONArray(String.valueOf(day));
                 for (int i = 0; i < routeIDs.length(); i++) {
                     int current_index = (int) routeIDs.get(i);
@@ -193,7 +195,7 @@ public class API {
                 //System.out.println(reply);
                 final_places = new JSONObject();
             }
-            reply.put("response", 400);
+            reply.put("response", 200);
             return reply;
         } catch (Throwable ex) {
             reply.put("response", 400);
@@ -301,11 +303,12 @@ public class API {
                     saved_places = 0;
                     saved_rest = 0;
                     saved_parks = 0;
+                    routesIDs.put(String.valueOf(day_i), (Object) ids);
+                    ids = new JSONArray();
                 }
-                routesIDs.put(String.valueOf(route_i), (Object) ids);
-                ids = new JSONArray();
+                //routesIDs.put(String.valueOf(route_i), (Object) ids);
+                //ids = new JSONArray();
             }
-
             routesIDs.put("response", 200);
             return routesIDs;
         } catch (Throwable ex) {

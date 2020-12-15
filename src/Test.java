@@ -21,11 +21,11 @@ public class Test {
 //        JSONObject resp = api.login(user);
 //        System.out.println(resp);
 
-        JSONObject info = new JSONObject().put("cityName","Budapest");
-        info.put("dateOfArrival","20/10/2020");
-        info.put("dateOfReturn","21/10/2020");
-        info.put("userID", 1);
-        JSONObject resp = api.seePlans(info);
-        System.out.println(resp);
+//        JSONObject info = new JSONObject().put("cityName","Budapest");
+//        info.put("dateOfArrival","20/10/2020");
+//        info.put("dateOfReturn","21/10/2020");
+//        info.put("userID", 1);
+//        JSONObject resp = api.seePlans(info);
+//        System.out.println(resp);
     }
 }

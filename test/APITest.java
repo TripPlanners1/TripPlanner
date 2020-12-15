@@ -42,7 +42,7 @@ public class APITest {
     @Test
     public void testGetCities() throws Exception {
         JSONObject resp = api.getCities();
-        JSONAssert.assertEquals("{\"cities\":[\"Budapest\", \"Moscow\"],\"response\":200}", resp, false);
+        JSONAssert.assertEquals("{\"cities\":[\"Budapest\", \"Moscow\", \"Prague\", \"Vienna\"],\"response\":200}", resp, false);
     }
 
     @Test
