@@ -2,10 +2,14 @@ package utils;
 
 import classes.*;
 import dao.UsersDAO;
+import org.hibernate.Session;
+import org.hibernate.cfg.SetSimpleValueTypeSecondPass;
 import org.json.*;
 import service.*;
 
-import javax.inject.Inject;
+
+import org.hibernate.query.Query;
+
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -18,6 +22,7 @@ import java.util.List;
 
 public class API {
     static int numberOfRoutes = 2;
+    static int numberOfPlaces = 5;
     JSONObject reply = new JSONObject();
     boolean response;
 
@@ -311,6 +316,35 @@ public class API {
             }
             routesIDs.put("response", 200);
             return routesIDs;
+        } catch (Throwable ex) {
+            reply.put("response", 400);
+            reply.put("errorClass", ex.getClass()); //exception
+            reply.put("errorMessage", ex.getMessage());
+            System.out.println(ex.getMessage());
+            return reply;
+        }
+    }
+
+    public JSONObject seeNearestPlaces(JSONObject location) throws Exception {
+        try {
+            Double user_lat = location.getDouble("latitude");
+            Double user_long = location.getDouble("longitude");
+
+            List place = placeInformationService.getByDistance(user_lat, user_long);
+
+            if (place.size() != 0) {
+                for (int i = 0; i < numberOfPlaces; i++) {
+                    PlaceInformation current_place = (PlaceInformation)place.get(i);
+                    JSONArray place_info = new JSONArray();
+                    place_info.put(current_place.getName());
+                    place_info.put(current_place.getInformation());
+                    place_info.put(current_place.getRating());
+                    place_info.put(current_place.getFullAdress());
+                    reply.put(String.valueOf(i), (Object) place_info);
+                }
+            }
+            reply.put("response", 200);
+            return reply;
         } catch (Throwable ex) {
             reply.put("response", 400);
             reply.put("errorClass", ex.getClass()); //exception

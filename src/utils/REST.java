@@ -103,4 +103,14 @@ public class REST {
         return Response.status(apiResponse.getInt("response")).entity(result).build();
     }
 
+    @Path("seeNearest")
+    @POST
+    @Consumes("text/plain")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response sseeNearest(String location) throws Exception {
+        JSONObject request = new JSONObject(location);
+        apiResponse = api.seeNearestPlaces(request);
+        String result = "" + apiResponse;
+        return Response.status(apiResponse.getInt("response")).entity(result).build();
+    }
 }

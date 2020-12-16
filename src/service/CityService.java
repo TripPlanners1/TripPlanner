@@ -1,7 +1,6 @@
 package service;
 
 import classes.City;
-import classes.Users;
 import dao.CityDAO;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -11,7 +10,6 @@ import utils.SessionUtil;
 
 import java.sql.SQLException;
 import java.util.List;
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 
 

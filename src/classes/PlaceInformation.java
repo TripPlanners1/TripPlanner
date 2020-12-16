@@ -9,8 +9,13 @@ public class PlaceInformation {
     private String information;
     private String name;
     private String fullAdress;
-    private float rating;
-    private int reviews;
+    private Float rating;
+    private Integer reviews;
+    private Float Latitude;
+    private Float Longitude;
+
+    public PlaceInformation() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,19 +50,35 @@ public class PlaceInformation {
         this.fullAdress = fullAdress;
     }
 
-    public float getRating() {
+    public Float getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 
-    public int getReviews() {
+    public Integer getReviews() {
         return reviews;
     }
 
-    public void setReviews(int reviews) {
+    public void setReviews(Integer reviews) {
         this.reviews = reviews;
+    }
+
+    public Float getLatitude() {
+        return Latitude;
+    }
+
+    public void setLatitude(Float latitude) {
+        this.Latitude = latitude;
+    }
+
+    public Float getLongitude() {
+        return Longitude;
+    }
+
+    public void setLongitude(Float longitude) {
+        this.Longitude = longitude;
     }
 }
