@@ -106,6 +106,7 @@
         android:text="Forgot Password?"
         android:textAlignment="center"
         android:textColor="@color/black"
+        android:visibility="gone"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

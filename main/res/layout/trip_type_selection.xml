@@ -14,11 +14,12 @@
             android:layout_width="match_parent"
             android:layout_height="320dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/parliment" />
+            android:src="@drawable/parliment"
+            android:id="@+id/selectionImage"/>
 
         <TextView
-            android:id="@+id/textView6"
-            android:layout_width="239dp"
+            android:id="@+id/selectionName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
@@ -28,7 +29,10 @@
             android:layout_marginTop="219dp"
             android:layout_marginEnd="165dp"
             android:layout_marginBottom="448dp"
-            android:text="Budapest"
+            android:shadowColor="#000000"
+            android:shadowDx="1.5"
+            android:shadowDy="1.3"
+            android:shadowRadius="1.6"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="42sp"
@@ -90,101 +94,64 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="50dp">
 
                 <ImageButton
-                    android:onClick="filters"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginStart="320dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="15dp"
+                    android:id="@+id/imageButton7"
+                    android:layout_width="59dp"
+                    android:layout_height="59dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="335dp"
+                    android:layout_marginBottom="368dp"
                     android:background="@null"
-                    android:src="@drawable/ic_filters" />
+                    android:onClick="backToPostLogin"
+                    app:srcCompat="@drawable/ic_left_arrow" />
             </RelativeLayout>
 
-            <RelativeLayout android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
+            <Button
+                android:id="@+id/selectionOpt1"
+                android:layout_width="280dp"
+                android:layout_height="95dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="55dp"
+                android:backgroundTint="#1eb330"
                 android:onClick="goToMap"
-                xmlns:android="http://schemas.android.com/apk/res/android">
+                android:radius="14dp"
+                android:text="Suggested Locations Trip Plan"
+                android:textSize="16sp"
+                android:shadowColor="#000000"
+                android:shadowDx="1.5"
+                android:shadowDy="1.3"
+                android:shadowRadius="1.6"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loginPassword"
+                app:layout_constraintVertical_bias="0.143" />
 
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="11dp"
-                    android:layout_marginTop="11dp"
-                    android:textAllCaps="false"
-                    android:textColor="#969696"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:typeface="sans" />
-
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="170dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="-11dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/historical" />
-
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="267dp"
-                    android:layout_height="67dp"
-                    android:layout_marginStart="75dp"
-                    android:layout_marginTop="88dp"
-                    android:text="Historical"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white"
-                    android:textSize="42sp"
-                    android:textStyle="bold"
-                    android:typeface="sans"
-                    android:shadowColor="#000000"
-                    android:shadowDx="1.5"
-                    android:shadowDy="1.3"
-                    android:shadowRadius="1.6"/>
-
-            </RelativeLayout>
+            <Button
+                android:id="@+id/selectionOpt2"
+                android:layout_width="280dp"
+                android:layout_height="95dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="55dp"
+                android:backgroundTint="#1eb330"
+                android:onClick="extractJson"
+                android:radius="14dp"
+                android:text="Suggested Locations Near You"
+                android:textSize="16sp"
+                android:shadowColor="#000000"
+                android:shadowDx="1.5"
+                android:shadowDy="1.3"
+                android:shadowRadius="1.6"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loginPassword"
+                app:layout_constraintVertical_bias="0.143" />
 
 
         </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/imageButton3"
-            android:layout_width="59dp"
-            android:layout_height="59dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="347dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="661dp"
-            android:background="@null"
-            app:srcCompat="@android:drawable/ic_dialog_info" />
-
-        <ImageButton
-            android:id="@+id/imageButton7"
-            android:layout_width="59dp"
-            android:layout_height="59dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginEnd="347dp"
-            android:layout_marginBottom="661dp"
-            android:background="@null"
-            app:srcCompat="@drawable/abc_vector_test"
-            android:onClick="backToPostLogin"/>
 
 
     </RelativeLayout>

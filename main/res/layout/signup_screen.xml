@@ -88,7 +88,7 @@
         app:layout_constraintVertical_bias="0.517" />
 
     <Switch
-        android:visibility="invisible"
+        android:visibility="gone"
         android:id="@+id/switch1"
         android:layout_width="265dp"
         android:layout_height="40dp"
@@ -111,7 +111,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.942"
-        app:srcCompat="@drawable/ic_gm" />
+        app:srcCompat="@drawable/ic_gm"
+        android:visibility="gone"/>
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -124,7 +125,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.942"
-        app:srcCompat="@drawable/ic_facebook" />
+        app:srcCompat="@drawable/ic_facebook"
+        android:visibility="gone"/>
 
     <ImageButton
         android:id="@+id/showPasswordSign"

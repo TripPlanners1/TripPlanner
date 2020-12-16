@@ -47,10 +47,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".SignupScreen" />
         <activity android:name=".PostLogin" />
         <activity android:name=".LoginOptions" />
-        <activity android:name=".TripTypeSelect" />
+        <activity android:name=".TripTypeSelect"/>
         <activity
             android:name=".LocationDesc" />
         <activity android:name=".TripFilter" />

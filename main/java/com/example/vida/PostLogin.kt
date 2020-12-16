@@ -9,10 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.AuthFailureError
@@ -26,14 +23,17 @@ import java.util.*
 
 
 class PostLogin : AppCompatActivity() {
+
     private var userID : Int = 0
     private lateinit var textView : TextView
     private lateinit var arrivalDate : EditText
     private lateinit var returnDate : EditText
     private lateinit var arrivalButton : ImageButton
     private lateinit var returnButton : ImageButton
+    private lateinit var cityDropdown : Spinner
     private var AD:String?=null
     private var RD:String?=null
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +46,16 @@ class PostLogin : AppCompatActivity() {
 
         userID = intent.getIntExtra("userID",0)
 
+        cityDropdown = findViewById(R.id.city)
+
+        fillSpinner()
+
         arrangeDates()
+
     }
 
     fun seePlans(view: View){
-        val cityName = "Budapest"
+        val cityName = cityDropdown.selectedItem.toString()
         val arrivalD : String = arrivalDate.text.toString()
         val returnD : String = returnDate.text.toString()
         /*val data =JSONObject()
@@ -62,8 +67,7 @@ class PostLogin : AppCompatActivity() {
 
         var volleyRequestQueue: RequestQueue? = null
         var dialog: ProgressDialog? = null
-        //val serverAPIURL: String = "https://7e493076bb13.ngrok.io/tripPlanner/seePlans/$cityName/$arrivalD/$returnD/$userID"
-        val serverAPIURL: String = "https://f2c9bb66d7c9.ngrok.io/tripPlanner/seePlans/"
+        val serverAPIURL: String = "https://$serverID.ngrok.io/tripPlanner/seePlans/"
         val TAG = "Work"
 
         volleyRequestQueue = Volley.newRequestQueue(this)
@@ -115,6 +119,7 @@ class PostLogin : AppCompatActivity() {
                             val intent = Intent(this, TripTypeSelect::class.java)
                             intent.putExtra("arrivalDate",AD)
                             intent.putExtra("returnDate",RD)
+                            intent.putExtra("cityName",cityName)
                             intent.putExtra("stringJson",stringJson)
                             startActivity(intent)
                         }else{
@@ -136,7 +141,7 @@ class PostLogin : AppCompatActivity() {
             @Throws(AuthFailureError::class)
             override fun getBody(): ByteArray {
                 val jsonBody = JSONObject()
-                jsonBody.put("cityName","Budapest")
+                jsonBody.put("cityName",cityName)
                 jsonBody.put("dateOfArrival",arrivalD)
                 jsonBody.put("dateOfReturn",returnD)
                 jsonBody.put("userID",userID)
@@ -208,6 +213,19 @@ class PostLogin : AppCompatActivity() {
             }, year, month, day)
             dataPicker.show()
         }
+    }
+
+    fun fillSpinner(){
+
+        var items : ArrayList<String> = ArrayList<String>(3)
+        items.add("Budapest")
+        items.add("Prague")
+        items.add("Vienna")
+
+        val adapter = ArrayAdapter<String>(this, R.layout.dropdown_row, items)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        cityDropdown.adapter = adapter
+
     }
 
 }

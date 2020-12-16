@@ -26,9 +26,11 @@ import java.lang.Exception
 import java.text.DateFormat.MEDIUM
 
 
-
+var serverID = "5f63cd0740a4"
 
 class MainActivity : AppCompatActivity() {
+
+
     private lateinit  var loginUserName : TextView
     private lateinit  var loginPassword : TextView
 
@@ -76,7 +78,7 @@ class MainActivity : AppCompatActivity() {
 
             var volleyRequestQueue: RequestQueue? = null
             var dialog: ProgressDialog? = null
-            val serverAPIURL: String = "https://f2c9bb66d7c9.ngrok.io/tripPlanner/login/$userName/$password"
+            val serverAPIURL: String = "https://$serverID.ngrok.io/tripPlanner/login/$userName/$password"
             val TAG = "Work"
 
             volleyRequestQueue = Volley.newRequestQueue(this)
