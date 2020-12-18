@@ -23,11 +23,11 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 
-class main_map : AppCompatActivity(), OnMapReadyCallback {
+class main_map_2 : AppCompatActivity(), OnMapReadyCallback {
     private var cityName:String?=null
     private var lat:String?=null
     private var lng:String?=null
-    private lateinit var mapTitle: ImageView
+    private lateinit var mapTitle2: ImageView
 
     private lateinit var mMap: GoogleMap
 
@@ -39,13 +39,13 @@ class main_map : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_map)
+        setContentView(R.layout.activity_main_map_2)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
-                .findFragmentById(R.id.map) as SupportMapFragment
+                .findFragmentById(R.id.map2) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        mapTitle = findViewById(R.id.mapTitle)
+        mapTitle2 = findViewById(R.id.mapTitle2)
         changeImage()
 
         val string = intent.getStringExtra("locations")
@@ -55,7 +55,7 @@ class main_map : AppCompatActivity(), OnMapReadyCallback {
         lng = intent.getStringExtra("lng")
         extractJSON(json)
 
-        var listView = findViewById<ListView>(R.id.listView)
+        var listView = findViewById<ListView>(R.id.listView2)
 
         listView.adapter = LocationAdapter(this,R.layout.tts_list_item,locationList)
 
@@ -77,13 +77,13 @@ class main_map : AppCompatActivity(), OnMapReadyCallback {
             mMap.addMarker(item?.let { MarkerOptions().position(it) })
         }
 
-        var center : LatLng? = null
-        when(cityName){
-            "Vienna" -> center = LatLng(48.20849 , 16.37208)
-            "Budapest" -> center = LatLng(47.490998036 , 19.037166518)
-            "Prague" -> center = LatLng(50.073658 , 14.418540)
-        }
-
+//        var center : LatLng? = LatLng(lat.toDouble() , lng.toDouble())
+//        when(cityName){
+//            "Vienna" -> center = LatLng(48.20849 , 16.37208)
+//            "Budapest" -> center = LatLng(47.490998036 , 19.037166518)
+//            "Prague" -> center = LatLng(50.073658 , 14.418540)
+//        }
+        var center = LatLng(47.490998036 , 19.037166518)
         val cameraPosition = CameraPosition.Builder()
                 .target(center)
                 .zoom(12f)
@@ -135,21 +135,19 @@ class main_map : AppCompatActivity(), OnMapReadyCallback {
 
     private fun changeImage(){
         when(cityName){
-            "Vienna" -> mapTitle.setImageResource(R.drawable.vienna)
-            "Budapest" -> mapTitle.setImageResource(R.drawable.parliment)
-            "Prague" -> mapTitle.setImageResource(R.drawable.prague)
+            "Vienna" -> mapTitle2.setImageResource(R.drawable.vienna)
+            "Budapest" -> mapTitle2.setImageResource(R.drawable.parliment)
+            "Prague" -> mapTitle2.setImageResource(R.drawable.prague)
         }
     }
 
     private fun extractJSON(json: JSONObject){
         for (i in 0 .. json.length()-1) {
-            for (j in 0 .. json.getJSONObject(i.toString()).length()-1) {
-                val array=json.getJSONObject(i.toString()).getJSONArray(j.toString())
-                markers.add(getLocationFromAddress(this,array[2].toString()))
-                val loc = Location(array[1].toString(),array[2].toString(),array[3].toString(),array[4].toString().toDouble(),"Day "+(i+1))
+                val array=json.getJSONArray(i.toString())
+                markers.add(getLocationFromAddress(this,array[3].toString()))
+                val loc = Location(array[0].toString(),array[3].toString(),array[1].toString(),array[2].toString().toDouble(),"")
                 locationList.add(loc)
                 locations.add(array)
-            }
         }
     }
 

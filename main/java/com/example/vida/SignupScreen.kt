@@ -66,7 +66,7 @@ class SignupScreen : AppCompatActivity() {
 
         var volleyRequestQueue: RequestQueue? = null
         var dialog: ProgressDialog? = null
-        val serverAPIURL: String = "https://$serverID.ngrok.io/tripPlanner/signup/$userName/$password/$email"
+        val serverAPIURL: String = "https://$serverID.ngrok.io/tripPlanner/signup/$email/$userName/$password"
         val TAG = "Work"
 
         volleyRequestQueue = Volley.newRequestQueue(this)

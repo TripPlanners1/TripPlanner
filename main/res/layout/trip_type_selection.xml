@@ -136,7 +136,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="55dp"
                 android:backgroundTint="#1eb330"
-                android:onClick="extractJson"
+                android:onClick="goToNear"
                 android:radius="14dp"
                 android:text="Suggested Locations Near You"
                 android:textSize="16sp"

@@ -26,7 +26,7 @@ import java.lang.Exception
 import java.text.DateFormat.MEDIUM
 
 
-var serverID = "5f63cd0740a4"
+var serverID = "90ac15ce4733"
 
 class MainActivity : AppCompatActivity() {
 

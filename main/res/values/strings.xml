@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">vida</string>
+    <string name="app_name">Trip Planner</string>
     <string name="title_activity_main_map">Map</string>
     <string name="postLoginWelcome">Welcome, </string>
+    <string name="permission_denied_explanation">placeholder </string>
+    <string name="settings">placeholder </string>
+    <string name="permission_rationale">placeholder </string>
 </resources>
